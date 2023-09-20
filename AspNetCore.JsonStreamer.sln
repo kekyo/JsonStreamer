@@ -15,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.JsonStreamer.TestDriver", "AspNetCore.JsonStreamer.TestDriver\AspNetCore.JsonStreamer.TestDriver.csproj", "{E8FE1DD2-DA16-4E2B-A223-09B8EE4D0B9D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.JsonStreamer.NewtonsoftJson.Tests", "AspNetCore.JsonStreamer.NewtonsoftJson.Tests\AspNetCore.JsonStreamer.NewtonsoftJson.Tests.csproj", "{A78B1826-533E-4B3B-8F73-089BEF1094B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,14 @@ Global
 		{69476286-6446-4FED-9877-AA6DE6BE9565}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69476286-6446-4FED-9877-AA6DE6BE9565}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69476286-6446-4FED-9877-AA6DE6BE9565}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8FE1DD2-DA16-4E2B-A223-09B8EE4D0B9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8FE1DD2-DA16-4E2B-A223-09B8EE4D0B9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8FE1DD2-DA16-4E2B-A223-09B8EE4D0B9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8FE1DD2-DA16-4E2B-A223-09B8EE4D0B9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A78B1826-533E-4B3B-8F73-089BEF1094B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A78B1826-533E-4B3B-8F73-089BEF1094B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A78B1826-533E-4B3B-8F73-089BEF1094B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A78B1826-533E-4B3B-8F73-089BEF1094B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

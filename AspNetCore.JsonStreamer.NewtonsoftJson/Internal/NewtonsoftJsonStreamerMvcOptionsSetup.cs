@@ -7,11 +7,13 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Options;
 using System;
 using System.Buffers;
 
-namespace Microsoft.AspNetCore.Mvc.Formatters;
+namespace AspNetCore.JsonStreamer.Internal;
 
 internal sealed class NewtonsoftJsonStreamerMvcOptionsSetup : IConfigureOptions<MvcOptions>
 {

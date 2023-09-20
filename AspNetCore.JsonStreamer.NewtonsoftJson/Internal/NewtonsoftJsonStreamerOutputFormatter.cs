@@ -7,6 +7,8 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -18,7 +20,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microsoft.AspNetCore.Mvc.Formatters;
+namespace AspNetCore.JsonStreamer.Internal;
 
 internal sealed class NewtonsoftJsonStreamerOutputFormatter : NewtonsoftJsonOutputFormatter
 {

@@ -14,7 +14,7 @@
     <RepositoryUrl>https://github.com/kekyo/AspNetCore.JsonStreamer.git</RepositoryUrl>
     <IsPackable>false</IsPackable>
 
-    <RootNamespace>Microsoft.AspNetCore.JsonStreamer</RootNamespace>
+    <RootNamespace>AspNetCore.JsonStreamer</RootNamespace>
     <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);CS1570;CS1591;CA1416;CS8981</NoWarn>
