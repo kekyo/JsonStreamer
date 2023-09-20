@@ -27,7 +27,7 @@
     <Company>Kouji Matsui (@kozy_kekyo, @kekyo@mastodon.cloud)</Company>
     <Authors>Kouji Matsui (@kozy_kekyo, @kekyo@mastodon.cloud)</Authors>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/kekyo/AspNetCore.Streamer</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/kekyo/AspNetCore.JsonStreamer</PackageProjectUrl>
     <PackageIcon>AspNetCore.JsonStreamer.100.png</PackageIcon>
     <PackageTags>git;metadata;reader;managed;lightweight</PackageTags>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>

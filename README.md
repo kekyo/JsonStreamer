@@ -17,7 +17,7 @@ JSON Lines streaming serializer on ASP.NET Core.
 
 ## What is this?
 
-Has anyone else noticed that ASP.NET Core can send streaming data using asynchronous iterators?
+Has anyone else noticed that ASP.NET Core can send streaming data using asynchronous iterators `IAsyncEnumerable<T>` ?
 It is code like this:
 
 ```csharp
@@ -68,8 +68,20 @@ In other words, there is no syntactic sugar such as `await foreach` that C# can 
 
 Streaming send is easy, but streaming receive is not.
 
-So we want to return the data in [JSON Lines (or NDJSON) format](https://jsonlines.org/), not JSON arrays.
-If this is the case, [there exists a deserializer implementation on the JavaScript side.](https://github.com/canjs/can-ndjson-stream)
+So we want to return the data in [JSON Lines (or NDJSON) format](https://jsonlines.org/):
+
+```json
+{"date":"2023-09-20T20:23:49.5736146+09:00","temperatureC":14,"temperatureF":57,"summary":"Mild"}
+{"date":"2023-09-21T20:23:49.5768618+09:00","temperatureC":34,"temperatureF":93,"summary":"Freezing"}
+{"date":"2023-09-22T20:23:49.5768924+09:00","temperatureC":1,"temperatureF":33,"summary":"Mild"}
+
+// (continues a lot of JObject)
+```
+
+That is, instead of an array of JSON, JObjects are sent separated by LF (Newline delimitation).
+This means that deserializer iteration is easier.
+
+If this is the case, there exists the deserializer implementation on the JavaScript side ([can-ndjson-stream](https://github.com/canjs/can-ndjson-stream)).
 
 The library overrides the serializer so that when returning asynchronous iterators, they are automatically sent in JSON Lines.
 (Other types use the default serializer)
