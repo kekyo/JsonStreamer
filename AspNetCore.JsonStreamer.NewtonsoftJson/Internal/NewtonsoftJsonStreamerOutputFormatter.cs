@@ -56,8 +56,21 @@ internal sealed class NewtonsoftJsonStreamerOutputFormatter : NewtonsoftJsonOutp
         var enumerable = (IAsyncEnumerable<TElement>)context.Object!;
         var ct = context.HttpContext.RequestAborted;
 
-        await foreach (var item in enumerable.WithCancellation(ct))
+        await using var enumerator =
+            enumerable.WithCancellation(ct).GetAsyncEnumerator();
+
+        var moveNextTask = enumerator.MoveNextAsync();
+
+        while (true)
         {
+            if (!await moveNextTask)
+            {
+                break;
+            }
+
+            var item = enumerator.Current;
+            moveNextTask = enumerator.MoveNextAsync();
+
             var jt = item != null ?
                 JToken.FromObject(item, js) :
                 JValue.CreateNull();
@@ -65,11 +78,11 @@ internal sealed class NewtonsoftJsonStreamerOutputFormatter : NewtonsoftJsonOutp
             await jt.WriteToAsync(jw, ct);
             await jw.FlushAsync(ct);
 
-            await tw.WriteLineAsync();
+            await tw.WriteLineAsync().WaitAsync(ct);
         }
 
-        await jw.FlushAsync();
-        await tw.FlushAsync();
+        await jw.FlushAsync(ct);
+        await tw.FlushAsync().WaitAsync(ct);
     }
 
     private static Type? GetAsyncEnumerableElementType(Type type) =>
