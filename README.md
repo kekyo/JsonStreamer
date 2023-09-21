@@ -205,6 +205,15 @@ async function fetchWeatherForeastItems() {
 }
 ```
 
+
+----
+
+## TODO
+
+* Enabling attribute-based control.
+* Streaming receiver package (.NET).
+
+
 ----
 
 ## License
