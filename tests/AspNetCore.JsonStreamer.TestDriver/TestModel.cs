@@ -11,15 +11,9 @@ using System;
 
 namespace AspNetCore.JsonStreamer;
 
-public sealed class WeatherForecast
+public sealed class TestModel
 {
-    public DateTime Date { get; set; }
-
-    public int TemperatureC { get; set; }
-
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-
-    public string? Summary { get; set; }
-
     public int Index { get; set; }
+    public DateTime Date { get; set; }
+    public Guid Guid { get; set; }
 }

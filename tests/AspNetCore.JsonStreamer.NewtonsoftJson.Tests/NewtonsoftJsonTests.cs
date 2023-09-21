@@ -10,6 +10,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
@@ -21,18 +23,11 @@ public sealed class NewtonsoftJsonTests
 {
     private static HttpClient httpClient = new();
 
-    [Test]
-    public async Task StreamerTest()
+    private async IAsyncEnumerable<T> StreamingFetchAsync<T>(Uri url)
     {
-        await using var testApp = new WeatherForecastWebApplication(
-            12345,
-            mvcBuilder => mvcBuilder.AddNewtonsoftJsonStreamer(),
-            1000000);
-
-        await testApp.StartAsync();
-
         using var response = await httpClient.GetAsync(
-            testApp.Url, HttpCompletionOption.ResponseHeadersRead);
+           url,
+           HttpCompletionOption.ResponseHeadersRead);
 
         response.EnsureSuccessStatusCode();
 
@@ -48,12 +43,39 @@ public sealed class NewtonsoftJsonTests
             }
 
             var jt = JToken.Parse(line);
-            var item = jt.ToObject<WeatherForecast>()!;
+            var item = jt.ToObject<T>()!;
+
+            yield return item;
+        }
+    }
+
+    [Test]
+    public async Task StreamerTest()
+    {
+        var totalCount = 1000000;
+
+        await using var testWebApplication = await TestWebApplication.CreateAsync(
+            12345,
+            mvcBuilder => mvcBuilder.AddNewtonsoftJsonStreamer(),
+            totalCount,
+            default);
+
+        var count = 0;
+        await foreach (var item in
+            this.StreamingFetchAsync<TestModel>(testWebApplication.Url))
+        {
+            Assert.AreEqual(count, item.Index);
 
             if ((item.Index % 1000) == 0)
             {
-                Trace.WriteLine($"StreamerTest: {item.Index}");
+                Trace.WriteLine($"NewtonsoftJsonTests: {item.Index}");
             }
+
+            count++;
         }
+
+        Trace.WriteLine($"NewtonsoftJsonTests: {count}");
+
+        Assert.AreEqual(totalCount, count);
     }
 }
