@@ -29,7 +29,7 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/kekyo/AspNetCore.JsonStreamer</PackageProjectUrl>
     <PackageIcon>AspNetCore.JsonStreamer.100.png</PackageIcon>
-    <PackageTags>git;metadata;reader;managed;lightweight</PackageTags>
+    <PackageTags>aspnetcore;webapi;jsonlines;ndjson;streaming</PackageTags>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <NoWarn>$(NoWarn);NU1605;NU1701;NU1803</NoWarn>
     <RepoRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)'))</RepoRoot>

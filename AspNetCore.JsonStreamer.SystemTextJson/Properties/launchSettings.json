@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "AspNetCore.JsonStreamer.SystemTextJson": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:43222;http://localhost:43223"
+    }
+  }
+}
