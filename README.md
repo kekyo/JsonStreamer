@@ -11,7 +11,7 @@ JSON Lines streaming serializer on ASP.NET Core.
 |Target serializer|Pakcage|
 |:----|:----|
 |Newtonsoft.Json|[![NuGet AspNetCore.JsonStreamer.NewtonsoftJson](https://img.shields.io/nuget/v/AspNetCore.JsonStreamer.NewtonsoftJson.svg?style=flat)](https://www.nuget.org/packages/AspNetCore.JsonStreamer.NewtonsoftJson)|
-|System.Text.Json|TODO:|
+|System.Text.Json|[![NuGet AspNetCore.JsonStreamer.NewtonsoftJson](https://img.shields.io/nuget/v/AspNetCore.JsonStreamer.SystemTextJson.svg?style=flat)](https://www.nuget.org/packages/AspNetCore.JsonStreamer.SystemTextJson)|
 
 ----
 
@@ -91,9 +91,14 @@ JsonStreamer overrides the serializer so that when returning asynchronous iterat
 
 ## Target .NET platforms
 
-* .NET 7.0 to 5.0
-* .NET Core 3.1
-* ASP.NET Core 7 to 3.
+|ASP.NET Core|Newtonsoft.Json|System.Text.Json|
+|:----|:----|:----|
+|7|.NET 7.x|.NET 7.x|
+|6|.NET 6.x|.NET 6.x|
+|5|.NET 5.x|.NET 5.x|
+|3|.NET Core 3.x|(Not supported)|
+
+* We tested on only ASP.NET Core 7 and 6.
 
 
 ----
@@ -107,7 +112,7 @@ You already use with:
 |Serializer|Application|
 |:----|:----|
 |Newtonsoft.Json|Install package [AspNetCore.JsonStreamer.NewtonsoftJson](https://www.nuget.org/packages/AspNetCore.JsonStreamer.NewtonsoftJson) and call `AddNewtonsoftJsonStreamer()` instead of `AddNewtonsoftJson()`.|
-|System.Text.Json|TODO:|
+|System.Text.Json|Install package [AspNetCore.JsonStreamer.SystemTextJson](https://www.nuget.org/packages/AspNetCore.JsonStreamer.SystemTextJson) and call `AddJsonStreamer()`.|
 
 For builder configuration example:
 
@@ -208,6 +213,9 @@ Apache-v2
 
 ## History
 
+* 0.3.0:
+  * Supported System.Text.Json based serializing.
+  * Improved cancellation.
 * 0.2.0:
   * Refactored.
 * 0.1.0:

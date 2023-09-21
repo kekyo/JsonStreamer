@@ -25,6 +25,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{76C9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherForecastStreamingWebApi", "samples\WeatherForecastStreamingWebApi\WeatherForecastStreamingWebApi.csproj", "{921E06CA-EB16-4581-A795-DFC9484462F7}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.JsonStreamer.SystemTextJson", "AspNetCore.JsonStreamer.SystemTextJson\AspNetCore.JsonStreamer.SystemTextJson.csproj", "{266D91E9-221A-492E-9F86-C57CAC26237A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.JsonStreamer.SystemTexttJson.Tests", "tests\AspNetCore.JsonStreamer.SystemTextJson.Tests\AspNetCore.JsonStreamer.SystemTexttJson.Tests.csproj", "{E3FBD55D-2BAD-4039-AFEA-A6C9C87D83CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,14 @@ Global
 		{921E06CA-EB16-4581-A795-DFC9484462F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{921E06CA-EB16-4581-A795-DFC9484462F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{921E06CA-EB16-4581-A795-DFC9484462F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{266D91E9-221A-492E-9F86-C57CAC26237A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{266D91E9-221A-492E-9F86-C57CAC26237A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{266D91E9-221A-492E-9F86-C57CAC26237A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{266D91E9-221A-492E-9F86-C57CAC26237A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3FBD55D-2BAD-4039-AFEA-A6C9C87D83CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3FBD55D-2BAD-4039-AFEA-A6C9C87D83CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3FBD55D-2BAD-4039-AFEA-A6C9C87D83CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3FBD55D-2BAD-4039-AFEA-A6C9C87D83CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +67,7 @@ Global
 		{C04AC96E-AC51-4F0B-B641-97EFC1809D09} = {0EAEE6CC-3CE2-449E-B491-AD3CC9D27551}
 		{9BB14795-EE13-4562-97D5-72D8FEA95CBB} = {0EAEE6CC-3CE2-449E-B491-AD3CC9D27551}
 		{921E06CA-EB16-4581-A795-DFC9484462F7} = {76C9F90B-157D-41DE-8D61-4502B6F3F181}
+		{E3FBD55D-2BAD-4039-AFEA-A6C9C87D83CC} = {0EAEE6CC-3CE2-449E-B491-AD3CC9D27551}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {99ACD783-476B-46A1-BE8B-E0E4D330AF77}

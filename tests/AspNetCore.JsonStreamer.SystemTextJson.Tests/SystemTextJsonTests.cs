@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace AspNetCore.JsonStreamer;
 
-public sealed class NewtonsoftJsonTests
+public sealed class SystemTextJsonTests
 {
     [Test]
     public async Task StreamerTest()
@@ -22,8 +22,8 @@ public sealed class NewtonsoftJsonTests
         var totalCount = 1000000;
 
         await using var testWebApplication = await TestWebApplication.CreateAsync(
-            12345,
-            mvcBuilder => mvcBuilder.AddNewtonsoftJsonStreamer(),
+            12445,
+            mvcBuilder => mvcBuilder.AddJsonStreamer(),
             totalCount,
             default);
 
@@ -35,13 +35,13 @@ public sealed class NewtonsoftJsonTests
 
             if ((item.Index % 1000) == 0)
             {
-                Trace.WriteLine($"NewtonsoftJsonTests: {item.Index}");
+                Trace.WriteLine($"SystemTextJsonTests: {item.Index}");
             }
 
             count++;
         }
 
-        Trace.WriteLine($"NewtonsoftJsonTests: {count}");
+        Trace.WriteLine($"SystemTextJsonTests: {count}");
 
         Assert.AreEqual(totalCount, count);
     }

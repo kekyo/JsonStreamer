@@ -7,41 +7,43 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
-using System.Buffers;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace AspNetCore.JsonStreamer.Internal;
 
-internal sealed class NewtonsoftJsonStreamerOutputFormatter : NewtonsoftJsonOutputFormatter
+internal sealed class SystemTextJsonStreamerOutputFormatter :
+    TextOutputFormatter
 {
     private static readonly MethodInfo writeAsyncEnumerableAsyncMethodT =
-        typeof(NewtonsoftJsonStreamerOutputFormatter).GetMethod(
+        typeof(SystemTextJsonStreamerOutputFormatter).GetMethod(
             "WriteAsyncEnumerableAsync",
             BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly)!;
+    private static readonly byte[] newline = new[] { (byte)'\n' };
     private static readonly ConcurrentDictionary<Type, Func<OutputFormatterWriteContext, Encoding, Task>?> writeAsyncEnumerableAsyncFunctions = new();
 
-    public NewtonsoftJsonStreamerOutputFormatter(
-        JsonSerializerSettings serializerSettings,
-        ArrayPool<char> charPool,
-        MvcOptions mvcOptions,
-        MvcNewtonsoftJsonOptions? jsonOptions) :
-#if NET6_0_OR_GREATER
-        base(serializerSettings, charPool, mvcOptions, jsonOptions)
-#else
-        base(serializerSettings, charPool, mvcOptions)
-#endif
+    private readonly SystemTextJsonOutputFormatter inner;
+
+    internal SystemTextJsonStreamerOutputFormatter(
+        JsonSerializerOptions serializerOptions)
     {
+        this.inner = new(serializerOptions);
+        foreach (var encoding in this.inner.SupportedEncodings)
+        {
+            this.SupportedEncodings.Add(encoding);
+        }
+        foreach (var mediaTypes in this.inner.SupportedMediaTypes)
+        {
+            this.SupportedMediaTypes.Add(mediaTypes);
+        }
     }
 
     private async Task WriteAsyncEnumerableAsync<TElement>(
@@ -57,11 +59,14 @@ internal sealed class NewtonsoftJsonStreamerOutputFormatter : NewtonsoftJsonOutp
 
         var moveNextTask = enumerator.MoveNextAsync();
 
-        await using var tw = context.WriterFactory(
-            context.HttpContext.Response.Body, selectedEncoding);
-
-        var jw = base.CreateJsonWriter(tw);
-        var js = base.CreateJsonSerializer(context);
+        var responseStream = selectedEncoding.CodePage == Encoding.UTF8.CodePage ?
+            context.HttpContext.Response.Body :
+            Encoding.CreateTranscodingStream(
+                context.HttpContext.Response.Body,
+                selectedEncoding,
+                Encoding.UTF8,
+                true);
+        var elementType = typeof(TElement);
 
         while (true)
         {
@@ -73,18 +78,11 @@ internal sealed class NewtonsoftJsonStreamerOutputFormatter : NewtonsoftJsonOutp
             var item = enumerator.Current;
             moveNextTask = enumerator.MoveNextAsync();
 
-            var jt = item != null ?
-                JToken.FromObject(item, js) :
-                JValue.CreateNull();
-
-            await jt.WriteToAsync(jw, ct);
-            await jw.FlushAsync(ct);
-
-            await tw.WriteLineAsync().WaitAsync(ct);
+            await JsonSerializer.SerializeAsync(
+                responseStream, item, elementType, this.inner.SerializerOptions, ct);
+            await responseStream.WriteAsync(newline, ct);
+            await responseStream.FlushAsync(ct);
         }
-
-        await jw.FlushAsync(ct);
-        await tw.FlushAsync().WaitAsync(ct);
     }
 
     private static Type? GetAsyncEnumerableElementType(Type type) =>
@@ -106,5 +104,5 @@ internal sealed class NewtonsoftJsonStreamerOutputFormatter : NewtonsoftJsonOutp
                     this,
                     writeAsyncEnumerableAsyncMethodT.MakeGenericMethod(elementType)) : null) is { } func) ?
             func(context, selectedEncoding) :
-            base.WriteResponseBodyAsync(context, selectedEncoding);
+            this.inner.WriteResponseBodyAsync(context, selectedEncoding);
 }
