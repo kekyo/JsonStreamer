@@ -1,4 +1,4 @@
-# AspNetCore.JsonStreamer
+# JsonStreamer
 
 JSON Lines streaming serializer on ASP.NET Core.
 
@@ -10,8 +10,8 @@ JSON Lines streaming serializer on ASP.NET Core.
 
 |Target serializer|Pakcage|
 |:----|:----|
-|System.Text.Json|TODO:|
 |Newtonsoft.Json|[![NuGet AspNetCore.JsonStreamer.NewtonsoftJson](https://img.shields.io/nuget/v/AspNetCore.JsonStreamer.NewtonsoftJson.svg?style=flat)](https://www.nuget.org/packages/AspNetCore.JsonStreamer.NewtonsoftJson)|
+|System.Text.Json|TODO:|
 
 ----
 
@@ -62,13 +62,13 @@ Were you aware that this code returns a JSON array?
 
 What about on the browser side receiving this?
 
-There is no standard asynchronous iterator implementation in the JavaScript world (maybe there is, I just don't know).
-Moreover, there is definitely no inherent language syntax for handling asynchronous iterators.
-In other words, there is no syntactic sugar such as `await foreach` that C# can handle.
+In .NET, JavaScript and other platforms, there are few libraries that can streaming deserialize huge JSON arrays.
+Streaming sending is easy, but streaming receiving is very difficult.
 
-Streaming send is easy, but streaming receive is not.
+On the other hand, there is a variant of the JSON format designed for this purpose.
+These are [JSON Lines (NDJSON) format](https://jsonlines.org/).
 
-So we want to return the data in [JSON Lines (or NDJSON) format](https://jsonlines.org/):
+It is a variant, but very simple and easy to understand:
 
 ```json
 {"date":"2023-09-20T20:23:49.5736146+09:00","temperatureC":14,"temperatureF":57,"summary":"Mild"}
@@ -78,27 +78,38 @@ So we want to return the data in [JSON Lines (or NDJSON) format](https://jsonlin
 // (continues a lot of JObject)
 ```
 
-That is, instead of an array of JSON, JObjects are sent separated by LF (Newline delimitation).
-This means that deserializer iteration is easier.
+That is instead of JSON array, JObjects are sent only separated by LF (Newline delimited).
+This means that deserializer implementation is easier.
 
-If this is the case, there exists the deserializer implementation on the JavaScript side ([can-ndjson-stream](https://github.com/canjs/can-ndjson-stream)).
+For example, in the case of JavaScript, the package [can-ndjson-stream](https://github.com/canjs/can-ndjson-stream) exists and can be used immediately.
 
-The library overrides the serializer so that when returning asynchronous iterators, they are automatically sent in JSON Lines.
+JsonStreamer overrides the serializer so that when returning asynchronous iterators, they are automatically sent in JSON Lines.
 (Other types use the default serializer)
 
-### Target .NET platforms
+
+----
+
+## Target .NET platforms
 
 * .NET 7.0 to 5.0
 * .NET Core 3.1
 * ASP.NET Core 7 to 3.
 
+
+----
+
 ## How to use
 
 It is very easy to use, just install this package and set it up in the builder as follows.
 
-* You already use with Newtonsoft.Json serializer, use of [AspNetCore.JsonStreamer.NewtonsoftJson](https://www.nuget.org/packages/AspNetCore.JsonStreamer.NewtonsoftJson)
-  and call `AddNewtonsoftJsonStreamer()` instead of `AddNewtonsoftJson()`.
-* TODO:
+You already use with:
+
+|Serializer|Application|
+|:----|:----|
+|Newtonsoft.Json|Install package [AspNetCore.JsonStreamer.NewtonsoftJson](https://www.nuget.org/packages/AspNetCore.JsonStreamer.NewtonsoftJson) and call `AddNewtonsoftJsonStreamer()` instead of `AddNewtonsoftJson()`.|
+|System.Text.Json|TODO:|
+
+For builder configuration example:
 
 ```csharp
 public static void Main(string[] args)
@@ -107,7 +118,7 @@ public static void Main(string[] args)
 
     // Add services to the container.
     builder.Services.AddControllers().
-        AddNewtonsoftJsonStreamer();    // Enable streamer.
+        AddNewtonsoftJsonStreamer();    // Enable JsonStreamer.
 
     // ...
 
@@ -115,6 +126,77 @@ public static void Main(string[] args)
 
     app.MapControllers();
     app.Run();
+}
+```
+
+And you have to use with asynchronous iterator `IAsyncEnumerable<T>` on the webapi result type:
+
+```csharp
+// Use IAsyncEnumerable<T> type on entry point result.
+[HttpGet]
+public IAsyncEnumerable<WeatherForecast> Get()
+{
+    // (Asynchronous iteration implementation)
+}
+```
+
+The sample fragment use with `HttpGet`, but this serializer can use any other http methods.
+
+Complete ASP.NET Core example projects are located in the [samples directory](samples/).
+
+
+----
+
+## Tips and Notes
+
+### Newtonsoft.Json version is NOT buffering
+
+ASP.NET Core official package [Microsoft.AspNetCore.Mvc.NewtonsoftJson](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) has a problem for serializing `IAsyncEnumerable<T>` as a JSON array actually buffers the data entirely.
+
+* See also: [ASP.NET Core `AsyncEnumerableReader.ReadInternal<T>()`](https://github.com/dotnet/aspnetcore/blob/e6c7c01bce4fce79bf5bc84098ea8d347ef358cc/src/Mvc/Mvc.Core/src/Infrastructure/AsyncEnumerableReader.cs#L79)
+
+However, the JsonStreamer implementation avoids this limitation because the operation of serializing JObject elements is performed in each iterative asynchronous iteration.
+
+### JavaScript deserializer
+
+We introduced [can-ndjson-stream](https://github.com/canjs/can-ndjson-stream) for deserialization in JavaScript,
+which can be used to configure the following asynchronous iterator (in TypeScript):
+
+```typescript
+import ndjsonStream from 'can-ndjson-stream';
+
+async function* streamingFetch<T>(url: string) {
+    const response = await fetch(url);
+    const reader =
+        ndjsonStream(response.body).
+        getReader();
+    while (true) {
+        const result = await reader.read();
+        if (result.done) {
+            break;
+        }
+        yield result.value as T;
+    }
+}
+```
+
+The `streamingFetch()` function can be used to drive an asynchronous iterator as follows:
+
+```typescript
+interface WeatherForecast {
+    date: string;
+    temperatureC: number;
+    temperatureF: number;
+    summary: string;
+}
+
+async function fetchWeatherForeastItems() {
+    const url = "http://localhost:4242/weatherforecast";
+
+    for await (const item of streamingFetch<WeatherForecast>(url)) {
+
+        // ...
+    }
 }
 ```
 
@@ -126,3 +208,7 @@ Apache-v2
 
 ## History
 
+* 0.2.0:
+  * Refactored.
+* 0.1.0:
+  * Initial release for Newtonsoft.Json serializer.
