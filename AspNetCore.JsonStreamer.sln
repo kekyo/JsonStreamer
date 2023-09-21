@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.JsonStreamer.Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.JsonStreamer.NewtonsoftJson.Tests", "tests\AspNetCore.JsonStreamer.NewtonsoftJson.Tests\AspNetCore.JsonStreamer.NewtonsoftJson.Tests.csproj", "{9BB14795-EE13-4562-97D5-72D8FEA95CBB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{76C9F90B-157D-41DE-8D61-4502B6F3F181}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherForecastStreamingWebApi", "samples\WeatherForecastStreamingWebApi\WeatherForecastStreamingWebApi.csproj", "{921E06CA-EB16-4581-A795-DFC9484462F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,10 @@ Global
 		{9BB14795-EE13-4562-97D5-72D8FEA95CBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BB14795-EE13-4562-97D5-72D8FEA95CBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BB14795-EE13-4562-97D5-72D8FEA95CBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{921E06CA-EB16-4581-A795-DFC9484462F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{921E06CA-EB16-4581-A795-DFC9484462F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{921E06CA-EB16-4581-A795-DFC9484462F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{921E06CA-EB16-4581-A795-DFC9484462F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +54,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C04AC96E-AC51-4F0B-B641-97EFC1809D09} = {0EAEE6CC-3CE2-449E-B491-AD3CC9D27551}
 		{9BB14795-EE13-4562-97D5-72D8FEA95CBB} = {0EAEE6CC-3CE2-449E-B491-AD3CC9D27551}
+		{921E06CA-EB16-4581-A795-DFC9484462F7} = {76C9F90B-157D-41DE-8D61-4502B6F3F181}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {99ACD783-476B-46A1-BE8B-E0E4D330AF77}
