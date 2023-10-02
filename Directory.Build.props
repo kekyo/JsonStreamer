@@ -11,24 +11,24 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/kekyo/AspNetCore.JsonStreamer.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/kekyo/JsonStreamer.git</RepositoryUrl>
     <IsPackable>false</IsPackable>
 
-    <RootNamespace>AspNetCore.JsonStreamer</RootNamespace>
+    <RootNamespace>JsonStreamer</RootNamespace>
     <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);CS1570;CS1591;CA1416;CS8981</NoWarn>
 
-    <Product>AspNetCore.JsonStreamer</Product>
-    <Trademark>AspNetCore.JsonStreamer</Trademark>
+    <Product>JsonStreamer</Product>
+    <Trademark>JsonStreamer</Trademark>
     <Copyright>Copyright (c) Kouji Matsui</Copyright>
     <Description>JSON Lines streaming serializer on ASP.NET Core.</Description>
 
     <Company>Kouji Matsui (@kozy_kekyo, @kekyo@mastodon.cloud)</Company>
     <Authors>Kouji Matsui (@kozy_kekyo, @kekyo@mastodon.cloud)</Authors>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/kekyo/AspNetCore.JsonStreamer</PackageProjectUrl>
-    <PackageIcon>AspNetCore.JsonStreamer.100.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/kekyo/JsonStreamer</PackageProjectUrl>
+    <PackageIcon>JsonStreamer.100.png</PackageIcon>
     <PackageTags>aspnetcore;webapi;jsonlines;ndjson;streaming</PackageTags>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <NoWarn>$(NoWarn);NU1605;NU1701;NU1803</NoWarn>

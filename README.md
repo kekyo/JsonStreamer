@@ -2,16 +2,25 @@
 
 JSON Lines streaming serializer on ASP.NET Core.
 
-![AspNetCore.JsonStreamer](Images/AspNetCore.JsonStreamer.100.png)
+![JsonStreamer](Images/JsonStreamer.100.png)
 
 # Status
 
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 
+## ASP.NET Core packages
+
 |Target serializer|Pakcage|
 |:----|:----|
-|Newtonsoft.Json|[![NuGet AspNetCore.JsonStreamer.NewtonsoftJson](https://img.shields.io/nuget/v/AspNetCore.JsonStreamer.NewtonsoftJson.svg?style=flat)](https://www.nuget.org/packages/AspNetCore.JsonStreamer.NewtonsoftJson)|
-|System.Text.Json|[![NuGet AspNetCore.JsonStreamer.NewtonsoftJson](https://img.shields.io/nuget/v/AspNetCore.JsonStreamer.SystemTextJson.svg?style=flat)](https://www.nuget.org/packages/AspNetCore.JsonStreamer.SystemTextJson)|
+|Newtonsoft.Json|[![NuGet JsonStreamer.NewtonsoftJson](https://img.shields.io/nuget/v/JsonStreamer.NewtonsoftJson.svg?style=flat)](https://www.nuget.org/packages/JsonStreamer.NewtonsoftJson)|
+|System.Text.Json|[![NuGet JsonStreamer.NewtonsoftJson](https://img.shields.io/nuget/v/JsonStreamer.SystemTextJson.svg?style=flat)](https://www.nuget.org/packages/JsonStreamer.SystemTextJson)|
+
+## Client package
+
+|Target serializer|Pakcage|
+|:----|:----|
+|Newtonsoft.Json|[![NuGet JsonStreamer.NewtonsoftJson.Client](https://img.shields.io/nuget/v/JsonStreamer.NewtonsoftJson.Client.svg?style=flat)](https://www.nuget.org/packages/JsonStreamer.NewtonsoftJson.Client)|
+|System.Text.Json|TODO:|
 
 ----
 
@@ -89,30 +98,35 @@ JsonStreamer overrides the serializer so that when returning asynchronous iterat
 
 ----
 
-## Target .NET platforms
+## Target .NET platforms (ASP.NET Core)
 
-|ASP.NET Core|Newtonsoft.Json|System.Text.Json|
+|Serializer|ASP.NET Core versions|
 |:----|:----|:----|
-|7|.NET 7.x|.NET 7.x|
-|6|.NET 6.x|.NET 6.x|
-|5|.NET 5.x|.NET 5.x|
-|3|.NET Core 3.x|(Not supported)|
+|Newtonsoft.Json|ASP.NET Core 7 to 3|
+|System.Text.Json|ASP.NET Core 7 to 5|
 
+* Newtonsoft.Json version is 13.0.1 or higher.
 * We tested on only ASP.NET Core 7 and 6.
 
+## Target .NET platforms (Client)
+
+|Serializer|.NET versions|
+|:----|:----|
+|Newtonsoft.Json|.NET 7 to 5, .NET Core 3.1, 2.2, .NET Standard 2.1, 2.0, .NET Framework 4.8.1 to 4.6.1|
+|System.Text.Json|TODO:|
+
+* Newtonsoft.Json version is 13.0.1 or higher.
 
 ----
 
-## How to use
+## How to use (ASP.NET Core)
 
 It is very easy to use, just install this package and set it up in the builder as follows.
 
-You already use with:
-
 |Serializer|Application|
 |:----|:----|
-|Newtonsoft.Json|Install package [AspNetCore.JsonStreamer.NewtonsoftJson](https://www.nuget.org/packages/AspNetCore.JsonStreamer.NewtonsoftJson) and call `AddNewtonsoftJsonStreamer()` instead of `AddNewtonsoftJson()`.|
-|System.Text.Json|Install package [AspNetCore.JsonStreamer.SystemTextJson](https://www.nuget.org/packages/AspNetCore.JsonStreamer.SystemTextJson) and call `AddJsonStreamer()`.|
+|Newtonsoft.Json|Install package [JsonStreamer.NewtonsoftJson](https://www.nuget.org/packages/JsonStreamer.NewtonsoftJson) and call `AddNewtonsoftJsonStreamer()` instead of `AddNewtonsoftJson()`.|
+|System.Text.Json|Install package [JsonStreamer.SystemTextJson](https://www.nuget.org/packages/JsonStreamer.SystemTextJson) and call `AddJsonStreamer()`.|
 
 For builder configuration example:
 
@@ -149,6 +163,78 @@ The sample fragment use with `HttpGet`, but this serializer can use any other ht
 
 Complete ASP.NET Core example projects are located in the [samples directory](samples/).
 
+----
+
+## How to use (Client)
+
+It is very easy to use, just install this package and set it up in the builder as follows.
+
+|Serializer|Application|
+|:----|:----|
+|Newtonsoft.Json|Install package [JsonStreamer.NewtonsoftJson.Client](https://www.nuget.org/packages/JsonStreamer.NewtonsoftJson.Client).|
+|System.Text.Json|TODO:|
+
+### For using with HttpClient
+
+Available varies of many overloads.
+
+```csharp
+var httpClient = new HttpClient();
+
+// ...
+
+// HTTP GET
+await foreach (var order in
+    await httpClient.GetStreamingAsync<Order>(
+        "https://example.com/api/orders"))
+{
+    // Already deserialized the "Order" object.
+}
+
+// HTTP POST
+await foreach (var order in
+    await httpClient.PostStreamingAsync<Order>(
+        "https://example.com/api/orders",
+        new StringContent("ORDER DATA")))
+{
+    // Already deserialized the "Order" object.
+}
+```
+
+```csharp
+var httpClient = new HttpClient();
+
+// ...
+
+// Get from the response interface
+await using var response = await httpClient.GetAsync(...);
+
+await foreach (var order in
+    await response.Content.ReadStreamingAsync<Order>())
+{
+    // Already deserialized the "Order" object.
+}
+```
+
+### For using with Stream
+
+You can use JsonStreamer outsite HTTP access.
+
+```csharp
+using var fs = new FileStream(
+    "huge_data.jsonl",
+    FileMode.Open, FileAccess.Read, FileShare.Read,
+    65536, true);
+
+// ...
+
+await foreach (var order in
+    await fs.ReadStreamingAsync<Order>(
+        "https://example.com/api/orders"))
+{
+    // Already deserialized the "Order" object.
+}
+```
 
 ----
 
@@ -211,7 +297,7 @@ async function fetchWeatherForeastItems() {
 ## TODO
 
 * Enabling attribute-based control.
-* Streaming receiver package (.NET).
+* Streaming receiver package (System.Text.Json version).
 
 
 ----
@@ -222,6 +308,9 @@ Apache-v2
 
 ## History
 
+* 0.4.0:
+  * (Breaking change) Renamed package name `JsonStreamer.*` instead of `JsonStreamer`.
+  * Added JsonStreamer client package.
 * 0.3.0:
   * Supported System.Text.Json based serializing.
   * Improved cancellation.
