@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFrameworks>net5.0;net6.0;net7.0</TargetFrameworks>
+    <IsPackable>true</IsPackable>
+    <Description>JSON Lines streaming serializer on ASP.NET Core.</Description>
+    <PackageTags>aspnetcore;webapi;jsonlines;ndjson;streaming</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Properties\**" />
+    <Content Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
+    <_WebToolingArtifacts Remove="Properties\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../Images/JsonStreamer.100.png" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+</Project>

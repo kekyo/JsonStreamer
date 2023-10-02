@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\AspNetCore.JsonStreamer.NewtonsoftJson\AspNetCore.JsonStreamer.NewtonsoftJson.csproj" />
+    <ProjectReference Include="..\..\JsonStreamer.NewtonsoftJson\JsonStreamer.NewtonsoftJson.csproj" />
   </ItemGroup>
 
 </Project>

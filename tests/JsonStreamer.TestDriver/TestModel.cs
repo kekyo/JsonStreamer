@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////////////////
+﻿//////////////////////////////////////////////////////////////////////////////
 //
 // JsonStreamer - JSON Lines streaming serializer on ASP.NET Core.
 // Copyright (c) Kouji Matsui (@kozy_kekyo, @kekyo@mastodon.cloud)
@@ -7,12 +7,13 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
-namespace WeatherForecastStreamingWebApi;
+using System;
 
-public sealed class WeatherForecast
+namespace JsonStreamer;
+
+public sealed class TestModel
 {
+    public int Index { get; set; }
     public DateTime Date { get; set; }
-    public int TemperatureC { get; set; }
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-    public string? Summary { get; set; }
+    public Guid Guid { get; set; }
 }

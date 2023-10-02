@@ -1,0 +1,81 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34024.191
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonStreamer.NewtonsoftJson", "JsonStreamer.NewtonsoftJson\JsonStreamer.NewtonsoftJson.csproj", "{69476286-6446-4FED-9877-AA6DE6BE9565}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B41119B4-079F-4C52-A774-5C86835B9429}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		build-nupkg.bat = build-nupkg.bat
+		build-nupkg.sh = build-nupkg.sh
+		Directory.Build.props = Directory.Build.props
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0EAEE6CC-3CE2-449E-B491-AD3CC9D27551}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonStreamer.TestDriver", "tests\JsonStreamer.TestDriver\JsonStreamer.TestDriver.csproj", "{C04AC96E-AC51-4F0B-B641-97EFC1809D09}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonStreamer.NewtonsoftJson.Tests", "tests\JsonStreamer.NewtonsoftJson.Tests\JsonStreamer.NewtonsoftJson.Tests.csproj", "{9BB14795-EE13-4562-97D5-72D8FEA95CBB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{76C9F90B-157D-41DE-8D61-4502B6F3F181}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherForecastStreamingWebApi", "samples\WeatherForecastStreamingWebApi\WeatherForecastStreamingWebApi.csproj", "{921E06CA-EB16-4581-A795-DFC9484462F7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonStreamer.SystemTextJson", "JsonStreamer.SystemTextJson\JsonStreamer.SystemTextJson.csproj", "{266D91E9-221A-492E-9F86-C57CAC26237A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonStreamer.SystemTexttJson.Tests", "tests\JsonStreamer.SystemTextJson.Tests\JsonStreamer.SystemTexttJson.Tests.csproj", "{E3FBD55D-2BAD-4039-AFEA-A6C9C87D83CC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonStreamer.NewtonsoftJson.Client", "JsonStreamer.NewtonsoftJson.Client\JsonStreamer.NewtonsoftJson.Client.csproj", "{DBABB34B-DAAD-4DF0-8C55-38B5F09C1D0C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69476286-6446-4FED-9877-AA6DE6BE9565}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69476286-6446-4FED-9877-AA6DE6BE9565}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69476286-6446-4FED-9877-AA6DE6BE9565}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69476286-6446-4FED-9877-AA6DE6BE9565}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C04AC96E-AC51-4F0B-B641-97EFC1809D09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C04AC96E-AC51-4F0B-B641-97EFC1809D09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C04AC96E-AC51-4F0B-B641-97EFC1809D09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C04AC96E-AC51-4F0B-B641-97EFC1809D09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BB14795-EE13-4562-97D5-72D8FEA95CBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BB14795-EE13-4562-97D5-72D8FEA95CBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BB14795-EE13-4562-97D5-72D8FEA95CBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BB14795-EE13-4562-97D5-72D8FEA95CBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{921E06CA-EB16-4581-A795-DFC9484462F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{921E06CA-EB16-4581-A795-DFC9484462F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{921E06CA-EB16-4581-A795-DFC9484462F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{921E06CA-EB16-4581-A795-DFC9484462F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{266D91E9-221A-492E-9F86-C57CAC26237A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{266D91E9-221A-492E-9F86-C57CAC26237A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{266D91E9-221A-492E-9F86-C57CAC26237A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{266D91E9-221A-492E-9F86-C57CAC26237A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3FBD55D-2BAD-4039-AFEA-A6C9C87D83CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3FBD55D-2BAD-4039-AFEA-A6C9C87D83CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3FBD55D-2BAD-4039-AFEA-A6C9C87D83CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3FBD55D-2BAD-4039-AFEA-A6C9C87D83CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBABB34B-DAAD-4DF0-8C55-38B5F09C1D0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBABB34B-DAAD-4DF0-8C55-38B5F09C1D0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBABB34B-DAAD-4DF0-8C55-38B5F09C1D0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBABB34B-DAAD-4DF0-8C55-38B5F09C1D0C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C04AC96E-AC51-4F0B-B641-97EFC1809D09} = {0EAEE6CC-3CE2-449E-B491-AD3CC9D27551}
+		{9BB14795-EE13-4562-97D5-72D8FEA95CBB} = {0EAEE6CC-3CE2-449E-B491-AD3CC9D27551}
+		{921E06CA-EB16-4581-A795-DFC9484462F7} = {76C9F90B-157D-41DE-8D61-4502B6F3F181}
+		{E3FBD55D-2BAD-4039-AFEA-A6C9C87D83CC} = {0EAEE6CC-3CE2-449E-B491-AD3CC9D27551}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {99ACD783-476B-46A1-BE8B-E0E4D330AF77}
+	EndGlobalSection
+EndGlobal
