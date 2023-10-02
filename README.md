@@ -1,6 +1,6 @@
 # JsonStreamer
 
-JSON Lines streaming serializer on ASP.NET Core.
+JSON Lines streaming serializer/deserializer on .NET and ASP.NET Core.
 
 ![JsonStreamer](Images/JsonStreamer.100.png)
 
@@ -94,14 +94,14 @@ For example, in the case of JavaScript, the package [can-ndjson-stream](https://
 
 JsonStreamer overrides the serializer so that when returning asynchronous iterators, they are automatically sent in JSON Lines.
 (Other types use the default serializer)
-
+And now supports on client-side .NET package!
 
 ----
 
 ## Target .NET platforms (ASP.NET Core)
 
 |Serializer|ASP.NET Core versions|
-|:----|:----|:----|
+|:----|:----|
 |Newtonsoft.Json|ASP.NET Core 7 to 3|
 |System.Text.Json|ASP.NET Core 7 to 5|
 
@@ -167,7 +167,7 @@ Complete ASP.NET Core example projects are located in the [samples directory](sa
 
 ## How to use (Client)
 
-It is very easy to use, just install this package and set it up in the builder as follows.
+It is very easy to use, just install this package.
 
 |Serializer|Application|
 |:----|:----|
@@ -179,6 +179,9 @@ It is very easy to use, just install this package and set it up in the builder a
 Available varies of many overloads.
 
 ```csharp
+using System.Net.Http;
+using JsonStreamer;
+
 var httpClient = new HttpClient();
 
 // ...
@@ -221,6 +224,9 @@ await foreach (var order in
 You can use JsonStreamer outsite HTTP access.
 
 ```csharp
+using System.IO;
+using JsonStreamer;
+
 using var fs = new FileStream(
     "huge_data.jsonl",
     FileMode.Open, FileAccess.Read, FileShare.Read,
@@ -229,8 +235,7 @@ using var fs = new FileStream(
 // ...
 
 await foreach (var order in
-    await fs.ReadStreamingAsync<Order>(
-        "https://example.com/api/orders"))
+    await fs.ReadStreamingAsync<Order>())
 {
     // Already deserialized the "Order" object.
 }
@@ -309,7 +314,7 @@ Apache-v2
 ## History
 
 * 0.4.0:
-  * (Breaking change) Renamed package name `JsonStreamer.*` instead of `JsonStreamer`.
+  * (Breaking change) Renamed package name `JsonStreamer.*` instead of `AspNetCore.JsonStreamer.*`.
   * Added JsonStreamer client package.
 * 0.3.0:
   * Supported System.Text.Json based serializing.
