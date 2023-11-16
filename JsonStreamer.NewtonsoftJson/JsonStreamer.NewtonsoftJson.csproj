@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.0;netcoreapp3.1;net5.0;net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0;netcoreapp3.1;net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
     <IsPackable>true</IsPackable>
     <Description>JSON Lines streaming serializer on ASP.NET Core.</Description>
     <PackageTags>aspnetcore;webapi;jsonlines;ndjson;streaming</PackageTags>
@@ -25,6 +25,10 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>

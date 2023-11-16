@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFrameworks>net5.0;net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
     <IsPackable>true</IsPackable>
     <Description>JSON Lines streaming serializer on ASP.NET Core.</Description>
     <PackageTags>aspnetcore;webapi;jsonlines;ndjson;streaming</PackageTags>

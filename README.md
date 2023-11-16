@@ -313,6 +313,9 @@ Apache-v2
 
 ## History
 
+* 1.0.0:
+  * Supported ASP.NET Core 8.0 and 3.0 (netcoreapp3.0).
+  * Downgraded ASP.NET Core Newtonsoft.Json package requirements.
 * 0.4.0:
   * (Breaking change) Renamed package name `JsonStreamer.*` instead of `AspNetCore.JsonStreamer.*`.
   * Added JsonStreamer client package.
