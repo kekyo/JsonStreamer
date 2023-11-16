@@ -102,17 +102,16 @@ And now supports on client-side .NET package!
 
 |Serializer|ASP.NET Core versions|
 |:----|:----|
-|Newtonsoft.Json|ASP.NET Core 7 to 3|
-|System.Text.Json|ASP.NET Core 7 to 5|
+|Newtonsoft.Json|ASP.NET Core 8 to 3|
+|System.Text.Json|ASP.NET Core 8 to 5|
 
-* Newtonsoft.Json version is 13.0.1 or higher.
-* We tested on only ASP.NET Core 7 and 6.
+* We tested on only ASP.NET Core 8 downto 6.
 
 ## Target .NET platforms (Client)
 
 |Serializer|.NET versions|
 |:----|:----|
-|Newtonsoft.Json|.NET 7 to 5, .NET Core 3.1, 2.2, .NET Standard 2.1, 2.0, .NET Framework 4.8.1 to 4.6.1|
+|Newtonsoft.Json|.NET 8 to 5, .NET Core 3.1, 2.2, .NET Standard 2.1, 2.0, .NET Framework 4.8.1 to 4.6.1|
 |System.Text.Json|TODO:|
 
 * Newtonsoft.Json version is 13.0.1 or higher.
