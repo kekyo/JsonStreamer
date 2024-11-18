@@ -20,7 +20,6 @@ JSON Lines streaming serializer/deserializer on .NET and ASP.NET Core.
 |Target serializer|Pakcage|
 |:----|:----|
 |Newtonsoft.Json|[![NuGet JsonStreamer.NewtonsoftJson.Client](https://img.shields.io/nuget/v/JsonStreamer.NewtonsoftJson.Client.svg?style=flat)](https://www.nuget.org/packages/JsonStreamer.NewtonsoftJson.Client)|
-|System.Text.Json|TODO:|
 
 ----
 
@@ -102,17 +101,16 @@ And now supports on client-side .NET package!
 
 |Serializer|ASP.NET Core versions|
 |:----|:----|
-|Newtonsoft.Json|ASP.NET Core 8 to 3|
-|System.Text.Json|ASP.NET Core 8 to 5|
+|Newtonsoft.Json|ASP.NET Core 9 to 3|
+|System.Text.Json|ASP.NET Core 9 to 5|
 
-* We tested on only ASP.NET Core 8 downto 6.
+* We tested on only ASP.NET Core 9, 8 and 6.
 
 ## Target .NET platforms (Client)
 
 |Serializer|.NET versions|
 |:----|:----|
-|Newtonsoft.Json|.NET 8 to 5, .NET Core 3.1, 2.2, .NET Standard 2.1, 2.0, .NET Framework 4.8.1 to 4.6.1|
-|System.Text.Json|TODO:|
+|Newtonsoft.Json|.NET 9 to 5, .NET Core 3.1, 2.2, .NET Standard 2.1, 2.0, .NET Framework 4.8.1 to 4.6.1|
 
 * Newtonsoft.Json version is 13.0.1 or higher.
 
@@ -301,7 +299,6 @@ async function fetchWeatherForeastItems() {
 ## TODO
 
 * Enabling attribute-based control.
-* Streaming receiver package (System.Text.Json version).
 
 
 ----
@@ -312,6 +309,9 @@ Apache-v2
 
 ## History
 
+* 1.1.0:
+  * Supported .NET 9.0.
+  * Supported ASP.NET Core 9.0.
 * 1.0.0:
   * Supported ASP.NET Core 8.0 and 3.0 (netcoreapp3.0).
   * Downgraded ASP.NET Core Newtonsoft.Json package requirements.
